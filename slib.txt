@@ -1,0 +1,9 @@
+#compile a source file into position independent code "PIC" object file
+#-g include debugging symbols, -Wall print warnings, -c compile, -o output file
+gcc -fPIC -g -c -Wall -o spinor.o spinor.c
+
+#make a shared library out of object file -Wl passes comma separated options
+#to the linker(not the loader) do some research on the soname,fully qualified
+#and real name of a shared library. ldconfig recommends to explicitly link
+#against the standard c library libc.so ,therefore -lc
+gcc -shared -Wl,-soname,libspinor.so.1 -o libspinor.so.1.0.1 spinor.o -lc
